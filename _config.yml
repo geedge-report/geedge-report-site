@@ -1,0 +1,95 @@
+# Site settings
+title: "Geedge Report"
+tagline: "Investigating the Geedge Networks data leak"
+description: >-
+  Geedge Report studies the 2025 Geedge Networks data leak — the internal
+  documents and source code of a Chinese company that builds censorship systems.
+
+# Custom domain: the apex geedge.report, declared in the root CNAME file.
+# baseurl must be empty for a custom domain (a subpath like "/repo-name" is
+# only needed for a project page served from <org>.github.io/<repo>/).
+url: "https://geedge.report"
+baseurl: ""
+
+contact_email: "geedge-report@umich.edu"
+
+paper:
+  title: "Technical Analysis of the Geedge Networks Firewall Source Code Leak"
+  venue: "35th USENIX Security Symposium (USENIX Security '26)"
+  venue_short: "USENIX Security '26"
+  year: 2026
+  pdf: "/assets/geedge-tsg-usenix26.pdf"
+  artifact: "https://zenodo.org/records/20274003"
+  # The post that details the paper. Derived from the post's date + filename;
+  # update here if you rename or re-date _posts/*-geedge-firewall-source-code-analysis.md
+  post_url: "/posts/2026/08/geedge-firewall-source-code-analysis/"
+  badges:
+    - "Artifact Evaluated"
+    - "Artifacts Available"
+
+authors:
+  - { name: "Anna Ablove", aff: [1], site: "" }
+  - { name: "Johnnie Walker", aff: [2], site: "" }
+  - { name: "Ben Wolin", aff: [1], site: "" }
+  - { name: "Niklas Niere", aff: [3], site: "" }
+  - { name: "Felix Lange", aff: [3], site: "" }
+  - { name: "Aaron Ortwein", aff: [1], site: "" }
+  - { name: "Armin Huremagic", aff: [1], site: "" }
+  - { name: "Richa Priyanka", aff: [1], site: "" }
+  - { name: "Ali Zohaib", aff: [4], site: "" }
+  - { name: "Jade Sheffey", aff: [4], site: "" }
+  - { name: "Nico Heitmann", aff: [3], site: "" }
+  - { name: "J. Alex Halderman", aff: [1], site: "" }
+  - { name: "Juraj Somorovsky", aff: [3], site: "" }
+  - { name: "Amir Houmansadr", aff: [4], site: "" }
+  - { name: "Roya Ensafi", aff: [1], site: "" }
+  - { name: "Mingshi Wu", aff: [2], site: "" }
+  - { name: "Eric Wustrow", aff: [5], site: "" }
+
+affiliations:
+  1: "University of Michigan"
+  2: "GFW Report"
+  3: "Paderborn University"
+  4: "University of Massachusetts Amherst"
+  5: "University of Colorado Boulder"
+
+nav:
+  - { title: "Posts", url: "/posts/" }
+  - { title: "Resources", url: "/resources/" }
+  - { title: "Contact", url: "/contact/" }
+
+# Build
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  toc_levels: 2..3
+permalink: /posts/:year/:month/:title/
+timezone: America/New_York
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+collections:
+  findings:
+    output: true
+    permalink: /findings/:name/
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: "post" }
+  - scope: { path: "", type: "findings" }
+    values: { layout: "finding" }
+  - scope: { path: "", type: "pages" }
+    values: { layout: "page" }
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .jekyll-cache
+  # Parking lot for pages that are not published. Anything in here is ignored
+  # by the build, including its permalink — remove from this list to publish.
+  - extras

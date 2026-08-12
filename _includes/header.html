@@ -1,0 +1,25 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      {%- assign words = site.title | split: " " -%}
+      {%- assign n = words.size | minus: 1 -%}
+      <span class="brand-mark">
+        {%- if n > 0 -%}
+          {{ words | slice: 0, n | join: " " }} <span class="brand-accent">{{ words | last }}</span>
+        {%- else -%}
+          {{ site.title }}
+        {%- endif -%}
+      </span>
+      <span class="brand-sub">{{ site.tagline }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      {% for item in site.nav %}
+        {% assign target = item.url | relative_url %}
+        {% assign active = false %}
+        {% if item.url == "/" and page.url == "/" %}{% assign active = true %}
+        {% elsif item.url != "/" and page.url contains item.url %}{% assign active = true %}{% endif %}
+        <a href="{{ target }}"{% if active %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

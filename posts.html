@@ -1,0 +1,24 @@
+---
+layout: page
+title: "Posts"
+permalink: /posts/
+description: ""
+---
+
+
+{% if site.posts.size > 0 %}
+<ul class="entry-list">
+  {% for post in site.posts %}
+  <li class="entry">
+    <p class="entry-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+      {% if post.author %} · {{ post.author }}{% endif %}
+    </p>
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p class="excerpt">{{ post.subtitle | default: post.excerpt | strip_html | truncate: 220 }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="muted">No posts yet.</p>
+{% endif %}

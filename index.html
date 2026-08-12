@@ -1,0 +1,116 @@
+---
+layout: default
+title: "Geedge Report"
+description: "Geedge Report studies the September 2025 leak from Geedge Networks, a Chinese company that builds censorship systems for the Great Firewall of China and sells them to governments abroad."
+---
+
+<div class="wrap hero">
+
+  <h1>Inside the Geedge Networks leak</h1>
+
+  <p class="lede lede-hero">
+    In September 2025, the internal files of Chinese DPI company Geedge Networks were leaked to the public. 
+    We are analyzing their code to find out exactly how its systems watch and block Internet access — and where
+    they are switched on.
+  </p>
+
+  <h2>What happened</h2>
+
+  <p>
+    Geedge Networks was founded in 2018 by researchers with ties to MESA, a lab at the Chinese
+    Academy of Sciences that specializes in large-scale network traffic analysis. Its flagship
+    product is the <strong>Tiangou Secure Gateway (TSG)</strong>: a full-stack censorship platform
+    that inspects Internet traffic, identifies what people are doing, and blocks what a government
+    does not want them to reach.
+  </p>
+
+  <p>
+    In September 2025, more than 100,000 internal documents — source code, bug trackers, internal
+    wikis, and years of developer history — were leaked to the public. Journalists and human
+    rights organizations who received early access have documented how Geedge sells this
+    technology to governments abroad, with deployments reported in
+    <strong>Kazakhstan, Ethiopia, Pakistan, and Myanmar</strong>.
+
+  </p>
+
+  <p>
+    This is the first time the source code of a commercial censorship system has become public.
+    Until now, almost everything researchers knew about systems like these was inferred from the
+    outside, by sending traffic at them and watching what came back.
+  </p>
+
+  <h2>What we're doing</h2>
+
+  <p>
+    We are a group of Internet censorship researchers across five universities and the GFW Report. 
+    We read the leaked code, built the TSG firewall,
+    and ran it in an isolated lab so we could study it directly rather than guessing at it from a
+    distance.
+  </p>
+
+  <p>
+    That gives us something the field has never had: the ability to take a behavior we find in
+    the source code, turn it into a fingerprint, and then check real censorship systems around the world
+    to see which ones behave the same way. Our goal is to help the people who build circumvention
+    tools understand precisely what they are up against.
+  </p>
+
+  <h2>What we've found so far</h2>
+
+  <ul class="keys keys-plain">
+    <li>
+      <strong>China's Great Firewall is running parts of TSG.</strong>
+      <span>Geedge's systems are sold abroad, but we found the firewall itself carries
+      fingerprints from the leaked code — in how it forges DNS responses and how it generates the
+      packets it uses to cut connections off. The same code, or a close relative, appears to be
+      part of China's national censorship system.</span>
+    </li>
+    <li>
+      <strong>TSG is built to hunt VPNs and circumvention tools.</strong>
+      <span>The leak contains detection signatures for Psiphon, Tor, ExpressVPN, NordVPN,
+      Ultrasurf, WARP and dozens more. Blocking
+      these tools is not a side effect of the product; it is a headline feature.</span>
+    </li>
+    <li>
+      <strong>Censorship is sold and supported like any other enterprise product.</strong>
+      <span>Internal tickets show government customers filing bug reports when a tool slips
+      through, asking for one app to be blocked before another, and complaining when the
+      censorship catches too much legitimate traffic. Myanmar alone accounts for hundreds of
+      these tickets.</span>
+    </li>
+  </ul>
+
+  <div class="cta">
+    <p class="cta-kicker">The full analysis</p>
+    <h3>Read our paper</h3>
+    <p>
+      <em>Technical Analysis of the Geedge Networks Firewall Source Code Leak</em>, published at
+      {{ site.paper.venue }}. Our write-up has the abstract, the complete findings with
+      evidence, our data and tools, and a section-by-section walkthrough of the system.
+    </p>
+    <p class="cta-actions">
+      <a class="btn btn-primary" href="{{ site.paper.post_url | relative_url }}">Blog post →</a>
+      <a class="btn" href="{{ site.paper.pdf | relative_url }}">PDF</a>
+    </p>
+  </div>
+
+
+
+  {% if site.posts.size > 1 %}
+  <h2>Latest posts</h2>
+  <ul class="entry-list">
+    {% for post in site.posts limit: 4 %}
+    <li class="entry">
+      <p class="entry-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></p>
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="excerpt">{{ post.subtitle | default: post.excerpt | strip_html | truncate: 190 }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ '/posts/' | relative_url }}">All posts →</a></p>
+  {% else %}
+  <!-- <p class="muted">No posts yet. Follow-up work on the leak will be published here.</p> -->
+  {% endif %}
+
+
+</div>

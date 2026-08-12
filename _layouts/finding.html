@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<article class="wrap prose">
+  <header class="page-head">
+    <p class="eyebrow"><a href="{{ site.paper.post_url | append: '#walkthrough' | relative_url }}">The paper, section by section</a></p>
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}<p class="lede">{{ page.subtitle }}</p>{% endif %}
+    {% if page.paper_section %}<p class="muted small">Corresponds to §{{ page.paper_section }} of the paper.</p>{% endif %}
+  </header>
+
+  {{ content }}
+
+  <hr>
+  <p class="muted small">
+    Part of <a href="{{ site.paper.post_url | relative_url }}">{{ site.paper.title }}</a>,
+    {{ site.paper.venue_short }}.
+  </p>
+  <nav class="pager">
+    {% assign items = site.findings | sort: "order" %}
+    {% for item in items %}
+      {% if item.url == page.url %}
+        {% assign idx = forloop.index0 %}
+      {% endif %}
+    {% endfor %}
+    {% assign previ = idx | minus: 1 %}
+    {% assign nexti = idx | plus: 1 %}
+    {% if idx > 0 %}
+      {% assign prev = items[previ] %}
+      <a class="pager-prev" href="{{ prev.url | relative_url }}">← {{ prev.title }}</a>
+    {% endif %}
+    {% if nexti < items.size %}
+      {% assign nxt = items[nexti] %}
+      <a class="pager-next" href="{{ nxt.url | relative_url }}">{{ nxt.title }} →</a>
+    {% endif %}
+  </nav>
+</article>
