@@ -38,6 +38,15 @@ body {
   line-height: 1.62;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+
+  /* Keep the footer at the bottom of the viewport on short pages (e.g. Contact)
+     without pinning it over content on long ones. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+@supports (min-height: 100dvh) {
+  body { min-height: 100dvh; } /* accounts for mobile browser chrome */
 }
 
 .wrap {
@@ -125,7 +134,10 @@ body {
 
 /* ---------- Typography ---------- */
 
-main { padding: 2.75rem 0 4rem; }
+main {
+  padding: 2.75rem 0 4rem;
+  flex: 1 0 auto; /* absorbs leftover height so the footer lands at the bottom */
+}
 
 h1, h2, h3, h4 {
   font-family: var(--serif);
@@ -511,6 +523,7 @@ td code { font-size: 0.82em; }
 /* ---------- Footer ---------- */
 
 .site-footer {
+  flex-shrink: 0;
   border-top: 1px solid var(--rule);
   background: var(--bg-alt);
   padding: 2rem 0 2.5rem;
