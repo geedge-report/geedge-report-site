@@ -24,7 +24,7 @@ Then open <http://localhost:4000>.
 
 ## Structure
 
-| Path | What it is |
+| Path | Description |
 |---|---|
 | `_config.yml` | Site settings, author list, affiliations, nav, paper metadata |
 | `index.html` | Landing page: plain-language project overview, short findings, paper CTA |
